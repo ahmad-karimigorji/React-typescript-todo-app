@@ -1,9 +1,13 @@
 import React from "react";
 import { reducer } from "./reducer";
-import { TodoContextType, TodoProviderProps, TodosState } from "./type";
+import { Todo, TodoContextType, TodoProviderProps, TodosState } from "./type";
+
+const getLocal: Todo[] = localStorage.getItem("todos")
+  ? JSON.parse(localStorage.getItem("todos") as string)
+  : [];
 
 const initialState: TodosState = {
-  todos: [],
+  todos: getLocal,
 };
 
 export const TodoContext = React.createContext({} as TodoContextType);
