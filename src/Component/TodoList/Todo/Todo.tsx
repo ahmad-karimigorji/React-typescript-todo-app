@@ -1,7 +1,12 @@
 import { GoTrash } from "react-icons/go";
 import { TbCheck } from "react-icons/tb";
+import { TodoProps } from "./type";
+import { priorityColors } from "../../PriorityComponent/PriorityComponent";
+import { useContext } from "react";
+import { TodoContext } from "../../../Context/TodoProvider";
 
-const Todo = () => {
+const Todo = ({ todo }: TodoProps) => {
+  const { completedTodo, deleteTodo } = useContext(TodoContext);
   const todoStyle: React.CSSProperties = {
     display: "flex",
     justifyContent: "center",
@@ -23,10 +28,10 @@ const Todo = () => {
     minWidth: "30px",
     height: "30px",
     borderRadius: "100%",
-    border: "2px solid red",
+    border: `2px solid ${priorityColors[todo.priority]}`,
     color: "rgba(255, 255, 255, 0.87)",
     backgroundColor: "#26282B",
-    cursor: 'pointer'
+    cursor: "pointer",
   };
 
   const trashIconStyle: React.CSSProperties = {
@@ -35,18 +40,23 @@ const Todo = () => {
     color: "#fff",
     padding: "5px",
     border: "none",
-    cursor: 'pointer'
+    cursor: "pointer",
+  };
+
+  const handleCheck = () => {
+    completedTodo({ id: todo.id, completed: todo.completed });
+  };
+  const handleDelete = () => {
+    deleteTodo(todo.id);
   };
 
   return (
     <div style={todoStyle}>
-      <button style={checkIconStyle}>
-        <TbCheck />
+      <button style={checkIconStyle} onClick={handleCheck}>
+        {todo.completed && <TbCheck />}
       </button>
-      <p style={textStyle}>
-        text
-      </p>
-      <button style={trashIconStyle}>
+      <p style={textStyle}>{todo.text}</p>
+      <button style={trashIconStyle} onClick={handleDelete}>
         <GoTrash />
       </button>
     </div>

@@ -1,18 +1,19 @@
 import { BsFillFlagFill } from "react-icons/bs";
 import { PriorityComponentProps } from "./type";
 
+export const priorityColors: string[] = [
+  "rgb(124, 124, 124)",
+  "rgb(51, 116, 222)",
+  "rgb(219, 111, 39)",
+  "rgb(224, 60, 60)",
+];
+
 const PriorityComponent = ({
   value,
   active,
   ...rest
 }: PriorityComponentProps) => {
   
-  const priorityColors: string[] = [
-    "rgb(124, 124, 124)",
-    "rgb(51, 116, 222)",
-    "rgb(219, 111, 39)",
-    "rgb(224, 60, 60)",
-  ];
 
   const labelStyle: React.CSSProperties = {
     marginLeft: "5px",

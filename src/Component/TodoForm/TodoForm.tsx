@@ -1,8 +1,10 @@
 import PriorityComponent from "../PriorityComponent/PriorityComponent";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FormDataType } from "./type";
+import { TodoContext } from "../../Context/TodoProvider";
 
 const TodoForm = () => {
+  const {addTodo} = useContext(TodoContext)
   const [formData, setFormData] = useState<FormDataType>({
     priority: 0,
     text: "",
@@ -29,10 +31,18 @@ const TodoForm = () => {
     background: "#5F85DB",
     border: "1px solid #5F85DB",
     color: "rgba(255, 255, 255, 0.87)",
+    cursor: 'pointer'
   };
 
   const submitHandle = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(formData.text){
+      addTodo(formData)
+      setFormData({
+        priority: 0,
+        text: "",
+      })
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,6 +80,7 @@ const TodoForm = () => {
           <input
             style={textInputStyle}
             name="text"
+            value={formData.text}
             onChange={handleChange}
             type="text"
           />

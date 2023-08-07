@@ -1,5 +1,6 @@
 import TodoForm from "./Component/TodoForm/TodoForm";
 import TodoList from "./Component/TodoList/TodoList";
+import TodoProvider from "./Context/TodoProvider";
 
 function App() {
   const containerStyle: React.CSSProperties = {
@@ -10,10 +11,12 @@ function App() {
   };
 
   return (
-    <div style={containerStyle}>
-      <TodoForm />
-      <TodoList />
-    </div>
+    <TodoProvider>
+      <div style={containerStyle}>
+        <TodoForm />
+        <TodoList />
+      </div>
+    </TodoProvider>
   );
 }
 
